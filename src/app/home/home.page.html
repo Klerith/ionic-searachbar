@@ -1,12 +1,42 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header no-border>
+  
+  <ion-toolbar color="tertiary">
     <ion-title>
-      Ionic Blank
+      Usuarios
     </ion-title>
   </ion-toolbar>
+
+  <ion-toolbar color="tertiary">
+    <ion-searchbar placeholder="Buscar usuario..."
+                   animated
+                   (ionChange)="buscarUsuario( $event )">
+    </ion-searchbar>
+  </ion-toolbar>
+
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+<ion-content>
+  
+  <ion-list *ngIf="usuarios.length === 0">
+    <ion-item *ngFor="let i of [1,1,1,1,1,1,1,1,1,1]">
+      <ion-label>
+        <ion-skeleton-text width="40%"></ion-skeleton-text>
+        <ion-skeleton-text width="80%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-list *ngIf="usuarios.length > 0">
+
+    <ion-item *ngFor="let usuario of usuarios | filtro:textoBuscar">
+      <ion-label>
+        <h4> {{ usuario.name }}</h4>
+        <h3> {{ usuario.email }} </h3>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+
+
 </ion-content>
